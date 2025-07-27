@@ -8,7 +8,7 @@ on:
     inputs:
       destroy:
         description: 'Destroy Pulumi stack'
-        required: false
+        required: true
         default: 'false'
 
 env:
