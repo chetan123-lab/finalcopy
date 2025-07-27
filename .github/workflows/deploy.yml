@@ -15,7 +15,7 @@ env:
   AWS_REGION: ${{ vars.AWS_REGION }}
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY }}
   AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-  PULUMI_STACK: ${{ secrets.PULUMI_ORG }}/finalcopy/my-stack
+  PULUMI_STACK: ${{ secrets.PULUMI_ORG }}/finalcopy/dev
   PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
 
 jobs:
