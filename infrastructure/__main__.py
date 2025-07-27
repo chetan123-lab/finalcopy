@@ -1,9 +1,9 @@
 import pulumi
-from infrastructure.vpc import create_vpc
-from infrastructure.security_groups import create_security_groups
-from infrastructure.iam import create_iam_roles
-from infrastructure.alb import create_alb_wrapper
-from infrastructure.ecs import create_ecs_resources_wrapper
+from vpc import create_vpc
+from security_groups import create_security_groups
+from iam import create_iam_roles
+from alb import create_alb_wrapper
+from ecs import create_ecs_resources_wrapper
 
 vpc_resources = create_vpc()
 security_groups = create_security_groups(vpc_resources["vpc"])
