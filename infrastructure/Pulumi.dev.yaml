@@ -1,0 +1,25 @@
+config:
+  aws:region: us-east-1
+  vpc_cidr_block: "10.0.0.0/16"
+  public_subnet_a_cidr_block: "10.0.1.0/24"
+  public_subnet_b_cidr_block: "10.0.3.0/24"
+  private_subnet_cidr_block: "10.0.2.0/24"
+  availability_zone_a: "us-east-1a"
+  availability_zone_b: "us-east-1b"
+  alb_port: 5000
+  fargate_port: 5000
+  target_group_port: 5000
+  container_port: 5000
+  container_image: "221082206963.dkr.ecr.us-east-1.amazonaws.com/kyruushealth:latest"
+  ecr_actions:
+    - "ecr:GetAuthorizationToken"
+    - "ecr:BatchCheckLayerAvailability"
+    - "ecr:GetDownloadUrlForLayer"
+    - "ecr:BatchGetImage"
+  logs_actions:
+    - "logs:CreateLogStream"
+    - "logs:PutLogEvents"
+  policy_resources: "*"
+  cpu: "256"
+  memory: "512"
+  desired_count: 1
