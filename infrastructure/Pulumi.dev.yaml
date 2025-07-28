@@ -16,7 +16,6 @@ config:
     - "ecr:BatchCheckLayerAvailability"
     - "ecr:GetDownloadUrlForLayer"
     - "ecr:BatchGetImage"
-  logs_actions:
     - "logs:CreateLogStream"
     - "logs:PutLogEvents"
   policy_resources: "*"
