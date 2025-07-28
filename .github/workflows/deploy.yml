@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      destroy:
-        description: 'Destroy Pulumi stack'
-        required: true
-        default: 'false'
 
 env:
   AWS_REGION: ${{ vars.AWS_REGION }}
@@ -66,7 +60,6 @@ jobs:
   deploy:
    runs-on: ubuntu-latest
    needs: run-migrations
-   if: ${{ github.event.inputs.destroy != 'true' }}
    steps:
    - name: Checkout code
      uses: actions/checkout@v3
@@ -98,34 +91,5 @@ jobs:
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       AWS_REGION: ${{ env.AWS_REGION }}
 
-  destroy:
-    runs-on: ubuntu-latest
-    if: ${{ github.event.inputs.destroy == 'true' }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-
-      - name: Install Pulumi
-        uses: pulumi/setup-pulumi@v2
-        with:
-          pulumi-version: "latest"
-
-      - name: Select Pulumi stack
-        working-directory: ./infrastructure
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ env.PULUMI_ACCESS_TOKEN }}
-          PULUMI_STACK: ${{ env.PULUMI_STACK }}
-        run: |
-          pulumi stack select ${{ env.PULUMI_STACK }}
-
-      - name: Destroy with Pulumi
-        working-directory: ./infrastructure
-        run: |
-          pulumi destroy --yes
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ env.PULUMI_ACCESS_TOKEN }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ env.AWS_REGION }}
 
         
