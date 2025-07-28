@@ -19,12 +19,6 @@ def create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_securit
         name="my-ecs-cluster",
     )
     
-    log_group = aws.cloudwatch.LogGroup("log-group",
-    name="my-log-group",
-    retention_in_days=30,
-    )
-    
-
     # Create an ECS Task Definition
     task_definition = aws.ecs.TaskDefinition("task-definition",
         family="my-task-definition",
@@ -44,15 +38,7 @@ def create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_securit
                         "hostPort": container_port,
                         "protocol": "tcp",
                     },
-                ],              
-                "logConfiguration": {
-                "logDriver": "awslogs",
-                 "options": {
-                    "awslogs-group": "my-log-group",
-                    "awslogs-stream-prefix": "my-log-stream",
-                    "awslogs-region": "us-east-1",
-                },
-            },
+                ],            
             
             },
         ])),
