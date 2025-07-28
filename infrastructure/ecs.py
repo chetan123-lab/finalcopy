@@ -7,7 +7,7 @@ config = pulumi.Config()
 def create_ecs_resources_wrapper(ecs_task_execution_role, ecs_task_role, fargate_security_group, private_subnet, target_group):
     cpu = config.require("cpu")
     memory = config.require("memory")
-    desired_count = config.require("desired_count")
+    desired_count = config.require_int("desired_count")
     container_port = config.require_int("container_port")
     container_image = config.require("container_image")
     return create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_security_group, private_subnet, target_group, cpu, memory, desired_count, container_port, container_image)
@@ -29,7 +29,7 @@ def create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_securit
         task_role_arn=ecs_task_role.arn,
         container_definitions=pulumi.Output.all().apply(lambda args: json.dumps([
             {
-                "name": "my-container",
+                "name": "kyruushealth",
                 "image": container_image,
                 "portMappings": [
                     {
@@ -56,7 +56,7 @@ def create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_securit
         load_balancers=[
             aws.ecs.ServiceLoadBalancerArgs(
                 target_group_arn=target_group.arn,
-                container_name="my-container",
+                container_name="kyruushealth",
                 container_port=container_port,
             ),
         ],
