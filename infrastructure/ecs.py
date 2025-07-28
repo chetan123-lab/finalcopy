@@ -3,6 +3,7 @@ import json
 import pulumi_aws as aws
 
 config = pulumi.Config()
+
 cpu=config.require("cpu")
 memory=config.require("memory")
 desired_count=config.require_int("desired_count")
@@ -10,7 +11,6 @@ container_port=config.require_int("container_port")
 container_image=config.require("container_image")
 
 def create_ecs_resources_wrapper(ecs_task_execution_role, ecs_task_role, fargate_security_group, private_subnet, target_group):
-
     return create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_security_group, private_subnet, target_group, cpu, memory, desired_count, container_port, container_image)
 
 def create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_security_group, private_subnet, target_group, cpu, memory, desired_count, container_port, container_image):
