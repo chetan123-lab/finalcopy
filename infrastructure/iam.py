@@ -40,7 +40,8 @@ def create_iam_roles():
  
     # Load configuration
     config=pulumi.Config()
-    ecr_actions=config.require("ecr_actions")
+    ecr_actions=config.require_object("ecr_actions")
+    logs_actions=config.require_object("logs_actions")
     policy_resources=config.require("policy_resources")
 
     # the ECS task execution role
@@ -51,7 +52,7 @@ def create_iam_roles():
                 {
                     "Sid": "",
                     "Effect": "Allow",
-                    "Action": ecr_actions,
+                    "Action": ecr_actions + logs_actions,
                     "Resource": policy_resources
                 }
             ]
