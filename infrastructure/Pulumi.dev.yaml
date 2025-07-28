@@ -20,6 +20,6 @@ config:
     - "logs:CreateLogStream"
     - "logs:PutLogEvents"
   policy_resources: "*"
-  cpu: "1000"
-  memory: "1000"
+  cpu: "1024"
+  memory: "2048"
   desired_count: 2
