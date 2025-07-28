@@ -48,7 +48,7 @@ def create_ecs_resources(ecs_task_execution_role, ecs_task_role, fargate_securit
                 "logConfiguration": {
                 "logDriver": "awslogs",
                  "options": {
-                    "awslogs-group": args[0],
+                    "awslogs-group": "my-log-group",
                     "awslogs-stream-prefix": "my-log-stream",
                     "awslogs-region": "us-east-1",
                 },
